@@ -1,4 +1,4 @@
-module gitee.com/xddxz/ga_themes
+module github.com/xddxz/ga_themes
 
 go 1.15
 
