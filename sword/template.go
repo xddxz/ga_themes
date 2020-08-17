@@ -166,11 +166,19 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
 {{end}}`, "components/button": `{{define "button"}}
     <div class="btn-group {{.Orientation}}" {{.Style}}>
         {{if eq .Href ""}}
-            <button type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}{{.Class}}" id="{{.ID}}" {{if ne .LoadingText ""}}data-loading-text="{{.LoadingText}}"{{end}}>
+            {{if ne .LoadingText ""}}
+                <button type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}" data-loading-text="{{.LoadingText}}">
+            {{else}}
+                <button type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}">
+            {{end}}
                 {{langHtml .Content}}
             </button>
         {{else}}
-            <a href="{{.Href}}" type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}{{.Class}}" id="{{.ID}}" {{if ne .LoadingText ""}}data-loading-text="{{.LoadingText}}"{{end}}>
+            {{if ne .LoadingText ""}}
+                <a href="{{.Href}}" type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}" data-loading-text="{{.LoadingText}}">
+            {{else}}
+                <a href="{{.Href}}" type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}">
+            {{end}}
                 {{langHtml .Content}}
             </a>
         {{end}}
@@ -714,7 +722,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         })
     </script>
 {{end}}`, "components/form/table": `{{define "form_table"}}
-<table class="table table-hover" style="min-width: 800px;">
+<table class="table table-hover">
   <thead>
     <tr>
         {{range $key, $item := .TableFields }}
@@ -736,17 +744,11 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
               </td>
           {{end}}
 
-          <td class="form-group" style="width: 174px;">
+          <td class="form-group">
               <div>
-                    <div class="{{$.Field}}-up btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
-                        <i class="fa fa-arrow-up"></i>
-                    </div>
-                    <div class="{{$.Field}}-down btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
-                        <i class="fa fa-arrow-down"></i>
-                    </div> 
                     <div class="{{$.Field}}-remove btn btn-warning btn-sm pull-right">
                         <i class="fa fa-trash">&nbsp;</i>{{lang "remove"}}
-                    </div> 
+                    </div>
               </div>
           </td>
       </tr>
@@ -777,17 +779,11 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             </td>
         {{end}}
 
-        <td class="form-group" style="width: 174px;">
+        <td class="form-group">
         <div>
-            <div class="{{$.Field}}-up btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
-                <i class="fa fa-arrow-up"></i>
-            </div>
-            <div class="{{$.Field}}-down btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
-                <i class="fa fa-arrow-down"></i>
-            </div> 
             <div class="{{.Field}}-remove btn btn-warning btn-sm pull-right">
-                <i class="fa fa-trash">&nbsp;</i>{{lang "remove"}}
-            </div>         
+            <i class="fa fa-trash">&nbsp;</i>{{lang "remove"}}
+            </div>
         </div>
         </td>
   </tr>
@@ -802,21 +798,6 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     $(this)
       .closest("tr")
       .remove();
-  });
-
-  $("tbody").on("click", ".{{.Field}}-down", function() {    
-    let $tr = $(this).parents("tr");
-    let len = $(this).parents("tbody").find("tr").length;
-    if ($tr.index() !== len - 1) {
-        $tr.next().after($tr);
-    }
-  });
-
-  $("tbody").on("click", ".{{.Field}}-up", function() {    
-    let $tr = $(this).parents("tr");
-    if ($tr.index() !== 0){
-        $tr.prev().before($tr);
-    }
   });
 </script>
 {{ end }}
@@ -1675,16 +1656,16 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
                             {{if eq $Action ""}}
                                 {{if $EditUrl}}
                                     <a href='{{$EditUrl}}&__goadmin_edit_pk={{(index $info $PrimaryKey).Content}}'><i
-                                                class="fa fa-edit" style="font-size: 16px;"></i></a>
+                                                class="fa fa-edit"></i></a>
                                 {{end}}
                                 {{if $DeleteUrl}}
                                     <a href="javascript:void(0);" data-id='{{(index $info $PrimaryKey).Content}}'
-                                       class="grid-row-delete"><i class="fa fa-trash" style="font-size: 16px;"></i></a>
+                                       class="grid-row-delete"><i class="fa fa-trash"></i></a>
                                 {{end}}
                                 {{if $DetailUrl}}
                                     <a href="{{$DetailUrl}}&__goadmin_detail_pk={{(index $info $PrimaryKey).Content}}"
                                        class="grid-row-view">
-                                        <i class="fa fa-eye" style="font-size: 16px;"></i>
+                                        <i class="fa fa-eye"></i>
                                     </a>
                                 {{end}}
                             {{else}}

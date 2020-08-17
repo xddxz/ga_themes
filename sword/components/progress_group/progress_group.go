@@ -1,15 +1,17 @@
 package progress_group
 
 import (
+	"bytes"
+	"fmt"
+	"github.com/GoAdminGroup/go-admin/modules/logger"
+	adminTemplate "github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/themes/sword/components"
 	"html/template"
 	"strings"
-
-	adminTemplate "github.com/GoAdminGroup/go-admin/template"
 )
 
 type ProgressGroup struct {
-	*adminTemplate.BaseComponent
-
+	components.Base
 	Title       template.HTML
 	Molecular   int
 	Denominator int
@@ -19,12 +21,7 @@ type ProgressGroup struct {
 }
 
 func New() ProgressGroup {
-	return ProgressGroup{
-		BaseComponent: &adminTemplate.BaseComponent{
-			Name:     "progress-group",
-			HTMLData: List["progress-group"],
-		},
-	}
+	return ProgressGroup{}
 }
 
 func (p ProgressGroup) SetTitle(value template.HTML) ProgressGroup {
@@ -55,4 +52,24 @@ func (p ProgressGroup) SetMolecular(value int) ProgressGroup {
 	return p
 }
 
-func (p ProgressGroup) GetContent() template.HTML { return p.GetContentWithData(p) }
+func (p ProgressGroup) GetTemplate() (*template.Template, string) {
+	tmpl, err := template.New("progress-group").
+		Funcs(adminTemplate.DefaultFuncMap).
+		Parse(List["progress-group"])
+
+	if err != nil {
+		logger.Error("ProgressGroup GetTemplate Error: ", err)
+	}
+
+	return tmpl, "progress-group"
+}
+
+func (p ProgressGroup) GetContent() template.HTML {
+	buffer := new(bytes.Buffer)
+	tmpl, defineName := p.GetTemplate()
+	err := tmpl.ExecuteTemplate(buffer, defineName, p)
+	if err != nil {
+		fmt.Println("ComposeHtml Error:", err)
+	}
+	return template.HTML(buffer.String())
+}

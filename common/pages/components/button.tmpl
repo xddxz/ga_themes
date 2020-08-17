@@ -2,7 +2,7 @@
     <div class="btn-group {{.Orientation}}" {{.Style}}>
         {{if eq .Href ""}}
             {{if ne .LoadingText ""}}
-            <button type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}" data-loading-text="{{.LoadingText}}">
+                <button type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}" data-loading-text="{{.LoadingText}}">
             {{else}}
                 <button type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}">
             {{end}}
@@ -10,7 +10,7 @@
             </button>
         {{else}}
             {{if ne .LoadingText ""}}
-            <a href="{{.Href}}" type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}" data-loading-text="{{.LoadingText}}">
+                <a href="{{.Href}}" type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}" data-loading-text="{{.LoadingText}}">
             {{else}}
                 <a href="{{.Href}}" type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}">
             {{end}}

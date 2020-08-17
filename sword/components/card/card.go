@@ -1,42 +1,25 @@
 package card
 
 import (
-	"html/template"
-
-	"github.com/GoAdminGroup/go-admin/modules/utils"
+	"bytes"
+	"fmt"
+	"github.com/GoAdminGroup/go-admin/modules/logger"
 	adminTemplate "github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/types"
+	"github.com/GoAdminGroup/themes/sword/components"
+	"html/template"
 )
 
 type Card struct {
-	*adminTemplate.BaseComponent
-
+	components.Base
 	Title    string
 	SubTitle string
 	Content  template.HTML
 	Action   template.HTML
 	Footer   template.HTML
-
-	ID        string
-	BodyID    string
-	TopID     string
-	ContentID string
-	FooterID  string
 }
 
 func New() Card {
-	UUID := utils.Uuid(10)
-	return Card{
-		BaseComponent: &adminTemplate.BaseComponent{
-			Name:     "card",
-			HTMLData: List["card"],
-		},
-		ID:        UUID,
-		BodyID:    UUID + "_body",
-		TopID:     UUID + "_top",
-		ContentID: UUID + "_content",
-		FooterID:  UUID + "_footer",
-	}
+	return Card{}
 }
 
 func (c Card) SetTitle(title string) Card {
@@ -59,40 +42,29 @@ func (c Card) SetAction(action template.HTML) Card {
 	return c
 }
 
-func (c Card) AddButton(button types.Button) Card {
-	c.Footer, c.JS = button.Content()
-	c.Callbacks = append(c.Callbacks, button.GetAction().GetCallbacks())
-	return c
-}
-
 func (c Card) SetFooter(footer template.HTML) Card {
 	c.Footer = footer
 	return c
 }
 
-func (c Card) BindAction(action types.Action) Card {
-	c.BindActionTo(action, "#"+c.ID)
-	return c
+func (c Card) GetTemplate() (*template.Template, string) {
+	tmpl, err := template.New("card").
+		Funcs(adminTemplate.DefaultFuncMap).
+		Parse(List["card"])
+
+	if err != nil {
+		logger.Error("Login GetTemplate Error: ", err)
+	}
+
+	return tmpl, "card"
 }
 
-func (c Card) BindActionToBody(action types.Action) Card {
-	c.BindActionTo(action, "#"+c.BodyID)
-	return c
+func (c Card) GetContent() template.HTML {
+	buffer := new(bytes.Buffer)
+	tmpl, defineName := c.GetTemplate()
+	err := tmpl.ExecuteTemplate(buffer, defineName, c)
+	if err != nil {
+		fmt.Println("ComposeHtml Error:", err)
+	}
+	return template.HTML(buffer.String())
 }
-
-func (c Card) BindActionToTop(action types.Action) Card {
-	c.BindActionTo(action, "#"+c.TopID)
-	return c
-}
-
-func (c Card) BindActionToContent(action types.Action) Card {
-	c.BindActionTo(action, "#"+c.ContentID)
-	return c
-}
-
-func (c Card) BindActionToFooter(action types.Action) Card {
-	c.BindActionTo(action, "#"+c.FooterID)
-	return c
-}
-
-func (c Card) GetContent() template.HTML { return c.GetContentWithData(c) }

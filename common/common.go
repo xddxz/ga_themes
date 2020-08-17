@@ -1,11 +1,10 @@
 package common
 
 import (
-	"html/template"
-	"strings"
-
 	"github.com/GoAdminGroup/go-admin/modules/config"
 	adminTemplate "github.com/GoAdminGroup/go-admin/template"
+	"html/template"
+	"strings"
 )
 
 type BaseTheme struct {
@@ -13,14 +12,14 @@ type BaseTheme struct {
 	TemplateList map[string]string
 }
 
-const Version = "v0.0.39"
+const Version = "v0.0.38"
 
 func (b *BaseTheme) GetVersion() string {
 	return Version
 }
 
 func (b *BaseTheme) GetRequirements() []string {
-	return []string{">=v1.2.16"}
+	return []string{">=v1.2.13"}
 }
 
 var comps = []string{"datatable.min.js", "form.min.js", "tree.min.js", "treeview.min.js"}
