@@ -2,24 +2,28 @@ package card
 
 var List = map[string]string{
 	"card": `{{define "card"}}
-    <div class="card">
-        <div class="card-body">
+    <div class="card" id="{{.ID}}">
+        <div class="card-body" id="{{.BodyID}}">
             <div class="card-index">
-                <div class="card-top">
+                <div class="card-top" id="{{.TopID}}" {{if eq .SubTitle ""}}style="height: 43px;"{{end}}>
                     <div class="card-meta">
                         <div class="card-title">
                             <span>{{.Title}}</span>
-                            <span class="card-title-action">
-                                {{.Action}}
-                            </span>
+                            {{if ne .Action ""}}
+                                <span class="card-title-action">
+                                    {{.Action}}
+                                </span>
+                            {{end}}
                         </div>
-                        <div class="card-subtitle"><span>{{.SubTitle}}</span></div>
+                        {{if ne .SubTitle ""}}
+                            <div class="card-subtitle"><span>{{.SubTitle}}</span></div>
+                        {{end}}
                     </div>
                 </div>
-                <div class="card-content">
+                <div class="card-content" id="{{.ContentID}}">
                     {{.Content}}
                 </div>
-                <div class="card-footer">
+                <div class="card-footer" id="{{.FooterID}}">
                     {{.Footer}}
                 </div>
             </div>

@@ -1,6 +1,6 @@
 package sword
 
-var TemplateList = map[string]string{"403": `<div class="missing-content">
+var TemplateList = map[string]string{"403":`<div class="missing-content">
     <div class="missing-content-title">403</div>
     <div class="missing-content-title-subtitle">Sorry, you don't have access to this page.</div>
 </div>
@@ -21,7 +21,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     line-height: 1.6;
     text-align: center;
 }
-</style>`, "404": `<div class="missing-content">
+</style>`,"404":`<div class="missing-content">
     <div class="missing-content-title">404</div>
     <div class="missing-content-title-subtitle">Sorry, the page you visited does not exist.</div>
 </div>
@@ -42,7 +42,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     line-height: 1.6;
     text-align: center;
 }
-</style>`, "500": `<div class="error-content">
+</style>`,"500":`<div class="error-content">
     <div class="error-content-title">500</div>
     <div class="error-content-title-subtitle">Sorry, the server is reporting an error.</div>
 </div>
@@ -63,7 +63,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     line-height: 1.6;
     text-align: center;
 }
-</style>`, "admin_panel": `{{define "admin_panel"}}
+</style>`,"admin_panel":`{{define "admin_panel"}}
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 
@@ -128,13 +128,13 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             {{end}}
         </ul>
     </div>
-{{end}}`, "components/alert": `{{define "alert"}}
+{{end}}`,"components/alert":`{{define "alert"}}
 <div class="alert alert-{{.Theme}} alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <h4>{{langHtml .Title}}</h4>
     {{langHtml .Content}}
 </div>
-{{end}}`, "components/box": `{{define "box"}}
+{{end}}`,"components/box":`{{define "box"}}
 <div class="box box-{{.Theme}}" {{.Attr}}>
     {{if ne .Header ""}}
         {{if eq .HeadColor ""}}
@@ -163,29 +163,21 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     </div>
     {{end}}
 </div>
-{{end}}`, "components/button": `{{define "button"}}
+{{end}}`,"components/button":`{{define "button"}}
     <div class="btn-group {{.Orientation}}" {{.Style}}>
         {{if eq .Href ""}}
-            {{if ne .LoadingText ""}}
-                <button type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}" data-loading-text="{{.LoadingText}}">
-            {{else}}
-                <button type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}">
-            {{end}}
+            <button type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}{{.Class}}" id="{{.ID}}" {{if ne .LoadingText ""}}data-loading-text="{{.LoadingText}}"{{end}}>
                 {{langHtml .Content}}
             </button>
         {{else}}
-            {{if ne .LoadingText ""}}
-                <a href="{{.Href}}" type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}" data-loading-text="{{.LoadingText}}">
-            {{else}}
-                <a href="{{.Href}}" type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}">
-            {{end}}
+            <a href="{{.Href}}" type="{{.Type}}" class="btn {{.Size}} btn-{{.Theme}}{{.Class}}" id="{{.ID}}" {{if ne .LoadingText ""}}data-loading-text="{{.LoadingText}}"{{end}}>
                 {{langHtml .Content}}
             </a>
         {{end}}
     </div>
-{{end}}`, "components/col": `{{define "col"}}
+{{end}}`,"components/col":`{{define "col"}}
 <div class="{{.Size}}">{{langHtml .Content}}</div>
-{{end}}`, "components/form/array": `{{define "form_array"}}
+{{end}}`,"components/form/array":`{{define "form_array"}}
 <table class="table table-hover">
   <tbody class="{{.Field}}-table">
         {{range $k, $value := .ValueArr}}
@@ -244,7 +236,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
   });
 </script>
 {{ end }}
-`, "components/form/checkbox": `{{define "form_checkbox"}}
+`,"components/form/checkbox":`{{define "form_checkbox"}}
     {{range $key, $v := .Options }}
         <span class="icheck">
             <label class="checkbox-inline">
@@ -258,7 +250,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
 <script>
     $('input.{{.FieldClass}}').iCheck({checkboxClass: 'icheckbox_minimal-blue'})
 </script>
-{{end}}`, "components/form/checkbox_single": `{{define "form_checkbox_single"}}
+{{end}}`,"components/form/checkbox_single":`{{define "form_checkbox_single"}}
     <span class="icheck">
         <label class="checkbox-inline">
             <input type="checkbox" class="{{.FieldClass}}" {{attr (index .Options 0).SelectedLabel}} value='{{(index .Options 0).Value}}' name="{{.Field}}" style="position: absolute; opacity: 0;">
@@ -284,7 +276,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
 </script>
 {{end}}
 
-`, "components/form/checkbox_stacked": `{{define "form_checkbox_stacked"}}
+`,"components/form/checkbox_stacked":`{{define "form_checkbox_stacked"}}
     <div class="checkbox_stacked" style="margin-top: -7px;">
     {{range $key, $v := .Options }}
         <div class="checkbox icheck">
@@ -300,7 +292,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
 <script>
     $('input.{{.FieldClass}}').iCheck({checkboxClass: 'icheckbox_minimal-blue'})
 </script>
-{{end}}`, "components/form/code": `{{define "form_code"}}
+{{end}}`,"components/form/code":`{{define "form_code"}}
     <pre id="{{.Field}}" class="ace_editor" style="min-height:200px">
         <textarea {{if .Must}}required="1"{{end}} class="ace_text-input {{.Field}}"
                 {{if not .Editable}}disabled="disabled"{{end}}>{{.Value}}</textarea>
@@ -319,7 +311,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             $('#{{.Field}}_input').html(encodeURIComponent({{$field}}editor.getValue()));
         });
     </script>
-{{end}}`, "components/form/color": `{{define "form_color"}}
+{{end}}`,"components/form/color":`{{define "form_color"}}
     {{if .Editable}}
         <div class="input-group colorpicker-element">
             <span class="input-group-addon"><i style="background-color: rgb(0, 0, 0);"></i></span>
@@ -335,7 +327,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
         <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
     {{end}}
-{{end}}`, "components/form/currency": `{{define "form_currency"}}
+{{end}}`,"components/form/currency":`{{define "form_currency"}}
     {{if .Editable}}
         <div class="input-group">
             <span class="input-group-addon">$</span>
@@ -359,7 +351,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
         <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
     {{end}}
-{{end}}`, "components/form/custom": `{{define "form_custom"}}
+{{end}}`,"components/form/custom":`{{define "form_custom"}}
     <div class="input-group">
         {{.CustomContent}}
     </div>
@@ -373,7 +365,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             {{.CustomCss}}
         </style>
     {{end}}
-{{end}}`, "components/form/datetime": `{{define "form_datetime"}}
+{{end}}`,"components/form/datetime":`{{define "form_datetime"}}
     {{if not .Editable}}
         <div class="box box-solid box-default no-margin">
             <div class="box-body" style="min-height: 40px;">
@@ -398,7 +390,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             });
         </script>
     {{end}}
-{{end}}`, "components/form/datetime_range": `{{define "form_datetime_range"}}
+{{end}}`,"components/form/datetime_range":`{{define "form_datetime_range"}}
     {{if .Editable}}
         <div class="input-group">
             {{if ne .Label ""}}
@@ -429,14 +421,14 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
         <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
     {{end}}
-{{end}}`, "components/form/default": `{{define "form_default"}}
+{{end}}`,"components/form/default":`{{define "form_default"}}
     <div class="box box-solid box-default no-margin">
         <div class="box-body" style="min-height: 40px;">
             {{.Value}}
         </div>
     </div>
     <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
-{{end}}`, "components/form/email": `{{define "form_email"}}
+{{end}}`,"components/form/email":`{{define "form_email"}}
     {{if .Editable}}
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
@@ -450,7 +442,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
         <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
     {{end}}
-{{end}}`, "components/form/file": `{{define "form_file"}}
+{{end}}`,"components/form/file":`{{define "form_file"}}
     <input type="file" class="{{.Field}}" name="{{.Field}}" data-initial-preview="{{.Value2}}"
            data-initial-caption="{{.Value}}">
     <input type="hidden" value="0" name="{{.Field}}__delete_flag" class="{{.Field}}__delete_flag">
@@ -460,13 +452,13 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             $(".{{.Field}}__delete_flag").val("1")
         });
     </script>
-{{end}}`, "components/form/help_block": `{{define "help_block"}}
+{{end}}`,"components/form/help_block":`{{define "help_block"}}
     {{if ne . ""}}
         <span class="help-block">
             <i class="fa fa-info-circle"></i>&nbsp;{{.}}
         </span>
     {{end}}
-{{end}}`, "components/form/iconpicker": `{{define "form_iconpicker"}}
+{{end}}`,"components/form/iconpicker":`{{define "form_iconpicker"}}
     <div class="input-group">
         <span class="input-group-addon"><i class="fa"></i></span>
         {{if eq .Value ""}}
@@ -482,7 +474,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     <script>
         $('.{{.Field}}').iconpicker({placement: 'bottomLeft'});
     </script>
-{{end}}`, "components/form/ip": `{{define "form_ip"}}
+{{end}}`,"components/form/ip":`{{define "form_ip"}}
     {{if .Editable}}
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-laptop fa-fw"></i></span>
@@ -496,7 +488,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
         <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
     {{end}}
-{{end}}`, "components/form/multi_file": `{{define "form_multi_file"}}
+{{end}}`,"components/form/multi_file":`{{define "form_multi_file"}}
     <input type="file" class="{{.Field}}" name="{{.Field}}" multiple data-initial-caption="{{.Placeholder}}">
     <input type="hidden" value="0" name="{{.Field}}__delete_flag" class="{{.Field}}__delete_flag">
     <script>
@@ -509,7 +501,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             $(".{{.Field}}__delete_flag").val("1")
         });
     </script>
-{{end}}`, "components/form/number": `{{define "form_number"}}
+{{end}}`,"components/form/number":`{{define "form_number"}}
     {{if .Editable}}
         <div class="input-group">
             <input {{if .Must}}required="1"{{end}} style="width: 100px; text-align: center;" type="text"
@@ -534,7 +526,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
         <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
     {{end}}
-{{end}}`, "components/form/number_range": `{{define "form_number_range"}}
+{{end}}`,"components/form/number_range":`{{define "form_number_range"}}
     {{if .Editable}}
         <div class="input-group number-range">
             <input style="text-align: center;" type="text" id="{{.Field}}_start__goadmin"
@@ -575,7 +567,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
         <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
     {{end}}
-{{end}}`, "components/form/password": `{{define "form_password"}}
+{{end}}`,"components/form/password":`{{define "form_password"}}
     {{if .Editable}}
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-eye-slash"></i></span>
@@ -588,7 +580,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             <div class="box-body">********</div>
         </div>
     {{end}}
-{{end}}`, "components/form/radio": `{{define "form_radio"}}
+{{end}}`,"components/form/radio":`{{define "form_radio"}}
     {{if .Editable}}
         <div class="radio">
         {{range $key, $v := .Options }}
@@ -608,7 +600,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
         <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
     {{end}}
-{{end}}`, "components/form/rate": `{{define "form_rate"}}
+{{end}}`,"components/form/rate":`{{define "form_rate"}}
     {{if .Editable}}
         <div class="input-group" style="width: 120px;">
             <input style="text-align: right;width: 120px; " placeholder="0" type="text" name="{{.Field}}" value="{{.Value}}" class="form-control {{.Field}}" />
@@ -620,7 +612,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
         <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
     {{end}}
-{{end}}`, "components/form/richtext": `{{define "form_rich_text"}}
+{{end}}`,"components/form/richtext":`{{define "form_rich_text"}}
     <div id="{{.Field}}-editor">
     </div>
     <input type="hidden" id="{{.Field}}" name="{{.Field}}" value='{{.Value}}'
@@ -642,7 +634,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             $("#{{.Field}}").val({{$field}}editor.txt.html())
         });
     </script>
-{{end}}`, "components/form/select": `{{define "form_select"}}
+{{end}}`,"components/form/select":`{{define "form_select"}}
     <select class="form-control {{.FieldClass}} select2-hidden-accessible" style="width: 100%;" name="{{.Field}}[]"
             multiple="" data-placeholder="{{.Placeholder}}" tabindex="-1" aria-hidden="true"
             {{if not .Editable}}disabled="disabled"{{end}}>
@@ -653,7 +645,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     <script>
         $("select.{{.FieldClass}}").select2({{.OptionExt}});
     </script>
-{{end}}`, "components/form/selectbox": `{{define "form_selectbox"}}
+{{end}}`,"components/form/selectbox":`{{define "form_selectbox"}}
     <select class="form-control {{.FieldClass}}" style="width: 100%;" name="{{.Field}}[]" multiple="multiple"
             data-placeholder="Input {{.Head}}" {{if not .Editable}}disabled="disabled"{{end}}>
         {{range  $key, $v := .Options }}
@@ -669,7 +661,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             "filterPlaceHolder": "Filter"
         });
     </script>
-{{end}}`, "components/form/singleselect": `{{define "form_select_single"}}
+{{end}}`,"components/form/singleselect":`{{define "form_select_single"}}
     <select class="form-control {{.FieldClass}} select2-hidden-accessible" style="width: 100%;" name="{{.Field}}"
             data-multiple="false" data-placeholder="{{.Placeholder}}" tabindex="-1" aria-hidden="true"
             {{if not .Editable}}disabled="disabled"{{end}}>
@@ -681,7 +673,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     <script>
         $("select.{{.FieldClass}}").select2({{.OptionExt}});
     </script>
-{{end}}`, "components/form/slider": `{{define "form_slider"}}
+{{end}}`,"components/form/slider":`{{define "form_slider"}}
     {{if .Editable}}
         <input type="text" class="{{.Field}}" name="{{.Field}}" data-from="" value="{{.Value}}" style="display: none;">
         <script>
@@ -693,7 +685,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
         <input type="hidden" class="{{.Field}}" name="{{.Field}}" value='{{.Value}}'>
     {{end}}
-{{end}}`, "components/form/switch": `{{define "form_switch"}}
+{{end}}`,"components/form/switch":`{{define "form_switch"}}
     <input id="__{{.Field}}" class="{{.Field}} ga_checkbox" {{attr (index .Options 0).SelectedLabel}} type="checkbox"
            name="__checkbox__{{.Field}}">
     {{$index := 0}}
@@ -721,8 +713,8 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             }
         })
     </script>
-{{end}}`, "components/form/table": `{{define "form_table"}}
-<table class="table table-hover">
+{{end}}`,"components/form/table":`{{define "form_table"}}
+<table class="table table-hover" style="min-width: 800px;">
   <thead>
     <tr>
         {{range $key, $item := .TableFields }}
@@ -744,11 +736,17 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
               </td>
           {{end}}
 
-          <td class="form-group">
+          <td class="form-group" style="width: 174px;">
               <div>
+                    <div class="{{$.Field}}-up btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
+                        <i class="fa fa-arrow-up"></i>
+                    </div>
+                    <div class="{{$.Field}}-down btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
+                        <i class="fa fa-arrow-down"></i>
+                    </div> 
                     <div class="{{$.Field}}-remove btn btn-warning btn-sm pull-right">
                         <i class="fa fa-trash">&nbsp;</i>{{lang "remove"}}
-                    </div>
+                    </div> 
               </div>
           </td>
       </tr>
@@ -779,11 +777,17 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             </td>
         {{end}}
 
-        <td class="form-group">
+        <td class="form-group" style="width: 174px;">
         <div>
-            <div class="{{.Field}}-remove btn btn-warning btn-sm pull-right">
-            <i class="fa fa-trash">&nbsp;</i>{{lang "remove"}}
+            <div class="{{$.Field}}-up btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
+                <i class="fa fa-arrow-up"></i>
             </div>
+            <div class="{{$.Field}}-down btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
+                <i class="fa fa-arrow-down"></i>
+            </div> 
+            <div class="{{.Field}}-remove btn btn-warning btn-sm pull-right">
+                <i class="fa fa-trash">&nbsp;</i>{{lang "remove"}}
+            </div>         
         </div>
         </td>
   </tr>
@@ -799,9 +803,24 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
       .closest("tr")
       .remove();
   });
+
+  $("tbody").on("click", ".{{.Field}}-down", function() {    
+    let $tr = $(this).parents("tr");
+    let len = $(this).parents("tbody").find("tr").length;
+    if ($tr.index() !== len - 1) {
+        $tr.next().after($tr);
+    }
+  });
+
+  $("tbody").on("click", ".{{.Field}}-up", function() {    
+    let $tr = $(this).parents("tr");
+    if ($tr.index() !== 0){
+        $tr.prev().before($tr);
+    }
+  });
 </script>
 {{ end }}
-`, "components/form/text": `{{define "form_text"}}
+`,"components/form/text":`{{define "form_text"}}
     {{if .Editable}}
         <div class="input-group">
             {{if not .HideLabel}}
@@ -851,18 +870,18 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             })
         </script>
     {{end}}
-{{end}}`, "components/form/textarea": `{{define "form_textarea"}}
+{{end}}`,"components/form/textarea":`{{define "form_textarea"}}
     <textarea {{if .Must}}required="1"{{end}} name="{{.Field}}" class="form-control" rows="5"
               placeholder="{{.Placeholder}}"
                       {{if not .Editable}}disabled="disabled"{{end}}>{{.Value}}</textarea>
-{{end}}`, "components/form/url": `{{define "form_url"}}
+{{end}}`,"components/form/url":`{{define "form_url"}}
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-internet-explorer fa-fw"></i></span>
         <input {{if .Must}}required="1"{{end}} type="text" name="{{.Field}}" value='{{.Value}}'
                class="form-control {{.Field}}"
                placeholder="{{.Placeholder}}">
     </div>
-{{end}}`, "components/form": `{{define "form"}}    
+{{end}}`,"components/form":`{{define "form"}}    
     {{.Header}}
     <form id={{.Id}} {{if .Ajax}}οnsubmit="return false;" {{end}}action="{{.Url}}" method="{{.Method}}" accept-charset="UTF-8" class="form-horizontal" {{if not .Ajax}}pjax-container{{end}}
           style="background-color: white;{{if ne (len .TabHeaders) 0}}padding: 0px;{{end}}">
@@ -919,7 +938,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             });
         </script>
     {{end}}
-{{end}}`, "components/form_components": `{{define "form_components"}}
+{{end}}`,"components/form_components":`{{define "form_components"}}
     {{if eq .FormType.String "default"}}
         {{ template "form_default" .  }}
     {{else if eq .FormType.String "text"}}
@@ -988,7 +1007,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             <i class="fa fa-info-circle"></i>&nbsp;{{.HelpMsg}}
         </span>
     {{end}}
-{{end}}`, "components/form_components_layout": `{{define "form_components_layout"}}
+{{end}}`,"components/form_components_layout":`{{define "form_components_layout"}}
 
     {{if ne (len .ContentList) 0}}
 
@@ -1224,7 +1243,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         {{end}}
 
     {{end}}
-{{end}}`, "components/form_layout_default": `{{define "form_layout_default"}}
+{{end}}`,"components/form_layout_default":`{{define "form_layout_default"}}
 
     <div class="box-body">
         <div class="fields-group">
@@ -1232,7 +1251,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
     </div>
 
-{{end}}`, "components/form_layout_flow": `{{define "form_layout_flow"}}
+{{end}}`,"components/form_layout_flow":`{{define "form_layout_flow"}}
 
     <div class="box-body">
         <div class="fields-group">
@@ -1240,7 +1259,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
     </div>
 
-{{end}}`, "components/form_layout_tab": `{{define "form_layout_tab"}}
+{{end}}`,"components/form_layout_tab":`{{define "form_layout_tab"}}
 
     <div class="col-md-12">
         <div class="nav-tabs-custom">
@@ -1267,11 +1286,11 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         </div>
     </div>
 
-{{end}}`, "components/form_layout_two_col": `{{define "form_layout_two_col"}}
+{{end}}`,"components/form_layout_two_col":`{{define "form_layout_two_col"}}
     <div class="row">
         {{ template "form_components_layout" .}}
     </div>
-{{end}}`, "components/image": `{{define "image"}}
+{{end}}`,"components/image":`{{define "image"}}
     {{if .HasModal}}
         <img src="{{.Src}}" width="{{.Width}}" height="{{.Height}}" data-toggle="modal" data-target="#img_{{.Uuid}}" style="cursor: zoom-in;">
         <div id="img_{{.Uuid}}" class="modal fade {{.Uuid}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -1299,11 +1318,11 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     {{else}}
         <img src="{{.Src}}" width="{{.Width}}" height="{{.Height}}">
     {{end}}
-{{end}}`, "components/label": `{{define "label"}}
+{{end}}`,"components/label":`{{define "label"}}
 <span class="label label-{{.Type}}" style="background-color: {{.Color}};">{{langHtml .Content}}</span>
-{{end}}`, "components/link": `{{define "link"}}
+{{end}}`,"components/link":`{{define "link"}}
     <a class="{{.Class}}" {{.Attributes}} data-title="{{.Title}}" href="{{.URL}}">{{.Content}}</a>
-{{end}}`, "components/paginator": `{{define "paginator"}}
+{{end}}`,"components/paginator":`{{define "paginator"}}
     {{if not .HideEntriesInfo}}
         <div style="float: left;margin-top: 21px;">{{lang "showing"}} <b>{{.CurPageStartIndex}}</b> {{lang "to"}}
             <b>{{.CurPageEndIndex}}</b> {{lang "of"}} <b>{{.Total}}</b> {{lang "entries"}} &nbsp;&nbsp;&nbsp;{{.ExtraInfo}}
@@ -1361,7 +1380,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         });
         gridPerPaper.selectpicker();
     </script>
-{{end}}`, "components/popup": `{{define "popup"}}
+{{end}}`,"components/popup":`{{define "popup"}}
 <div class="modal fade {{if .Draggable}}draggable{{end}}" id="{{.ID}}" tabindex="-1" role="dialog" aria-labelledby="{{.ID}}" aria-hidden="true">
     <div class="modal-dialog modal-{{.Size}}" role="document" style="{{if ne .Width ""}}width:{{.Width}};{{end}}">
         <div class="modal-content" style="{{if ne .Width ""}}width:{{.Width}};{{end}}">
@@ -1404,9 +1423,9 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             });
         </script>
     {{end}}
-{{end}}`, "components/row": `{{define "row"}}
+{{end}}`,"components/row":`{{define "row"}}
 <div class="row">{{langHtml .Content}}</div>
-{{end}}`, "components/table/box-header": `{{define "box-header"}}
+{{end}}`,"components/table/box-header":`{{define "box-header"}}
     <div class="pull-right">
 
         {{if ne .IsHideRowSelector true}}
@@ -1539,7 +1558,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
 
         {{end}}
     </script>
-{{end}}`, "components/table": `{{define "table"}}
+{{end}}`,"components/table":`{{define "table"}}
     <table class="table table-{{.Style}}" style="min-width: {{.MinWidth}};table-layout: {{.Layout}};">
         {{if eq .Type "table"}}
             {{if not .HideThead}}
@@ -1656,16 +1675,16 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
                             {{if eq $Action ""}}
                                 {{if $EditUrl}}
                                     <a href='{{$EditUrl}}&__goadmin_edit_pk={{(index $info $PrimaryKey).Content}}'><i
-                                                class="fa fa-edit"></i></a>
+                                                class="fa fa-edit" style="font-size: 16px;"></i></a>
                                 {{end}}
                                 {{if $DeleteUrl}}
                                     <a href="javascript:void(0);" data-id='{{(index $info $PrimaryKey).Content}}'
-                                       class="grid-row-delete"><i class="fa fa-trash"></i></a>
+                                       class="grid-row-delete"><i class="fa fa-trash" style="font-size: 16px;"></i></a>
                                 {{end}}
                                 {{if $DetailUrl}}
                                     <a href="{{$DetailUrl}}&__goadmin_detail_pk={{(index $info $PrimaryKey).Content}}"
                                        class="grid-row-view">
-                                        <i class="fa fa-eye"></i>
+                                        <i class="fa fa-eye" style="font-size: 16px;"></i>
                                     </a>
                                 {{end}}
                             {{else}}
@@ -2095,7 +2114,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             }
         </style>
     {{end}}
-{{end}}`, "components/tabs": `{{define "tabs"}}
+{{end}}`,"components/tabs":`{{define "tabs"}}
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
         {{range $key, $data := .Data}}
@@ -2120,7 +2139,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         {{end}}
     </div>
 </div>
-{{end}}`, "components/tree-header": `{{define "tree-header"}}
+{{end}}`,"components/tree-header":`{{define "tree-header"}}
 <div class="btn-group">
     <a class="btn btn-primary btn-sm tree-model-tree-tools" data-action="expand">
         <i class="fa fa-plus-square-o"></i>&nbsp;{{lang "expand"}}
@@ -2139,7 +2158,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
 </div>
 <div class="btn-group">
 </div>
-{{end}}`, "components/tree": `{{define "tree"}}
+{{end}}`,"components/tree":`{{define "tree"}}
     <div class="dd" id="tree-model">
         {{$EditUrl := .EditUrl}}
         {{$UrlPrefix := .UrlPrefix}}
@@ -2306,7 +2325,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             $(".roles").select2({"allowClear": true, "placeholder": "Roles"});
         });
     </script>
-{{end}}`, "components/treeview": `{{define "treeview"}}
+{{end}}`,"components/treeview":`{{define "treeview"}}
     <div id="{{.ID}}"></div>
     <script>
         $('#{{.ID}}').treeview({{.TreeJSON}});
@@ -2336,7 +2355,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             border-radius: 0px !important;
         }
     </style>
-{{end}}`, "content": `{{define "content"}}
+{{end}}`,"content":`{{define "content"}}
     {{if ne .Panel.CSS ""}}
         <style>
             {{.Panel.CSS}}
@@ -2470,7 +2489,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             }
         </style>
     {{end}}
-{{end}}`, "control_panel": `{{define "control_panel"}}
+{{end}}`,"control_panel":`{{define "control_panel"}}
     <div class="control-sidebar-bg" style="position: fixed; height: auto;"></div>
     <aside class="control-sidebar control-sidebar-dark control-sidebar-open"
            style="position: fixed; max-height: 100%; overflow: auto;">
@@ -2668,7 +2687,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             </div>
         </div>
     </aside>
-{{end}}`, "footer": `{{define "footer"}}
+{{end}}`,"footer":`{{define "footer"}}
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
             <b>Version</b> {{.System.Version}}
@@ -2679,7 +2698,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
         <strong>Powered by <a href="https://github.com/GoAdminGroup/go-admin">GoAdmin</a>.</strong>
         {{.FooterInfo}}
     </footer>
-{{end}}`, "head": `{{define "head"}}
+{{end}}`,"head":`{{define "head"}}
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -2696,7 +2715,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
 
         {{.CustomHeadHtml}}
     </head>
-{{end}}`, "header": `{{define "header"}}
+{{end}}`,"header":`{{define "header"}}
     <header class="main-header">
         <!-- Logo -->
         <a href="{{.UrlPrefix}}" class="logo">
@@ -2740,9 +2759,9 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             </div>
         </nav>
     </header>
-{{end}}`, "js": `{{define "js"}}
+{{end}}`,"js":`{{define "js"}}
     {{.TmplFootJS}}
-{{end}}`, "layout": `{{define "layout"}}
+{{end}}`,"layout":`{{define "layout"}}
 
     <!DOCTYPE html>
     <html>
@@ -2783,7 +2802,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     </html>
 
 {{end}}
-`, "menu": `{{define "menu"}}
+`,"menu":`{{define "menu"}}
     <ul class="sidebar-menu" data-widget="tree" data-plug="{{.Menu.PluginName}}">
         {{$UrlPrefix := .UrlPrefix}}
         {{range $key, $list := .Menu.List }}
@@ -2856,7 +2875,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             {{end}}
         {{end}}
     </ul>
-{{end}}`, "sidebar": `{{define "sidebar"}}
+{{end}}`,"sidebar":`{{define "sidebar"}}
     <aside class="main-sidebar">
         <section class="sidebar">
 
@@ -2864,4 +2883,4 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
 
         </section>
     </aside>
-{{end}}`}
+{{end}}`,}
